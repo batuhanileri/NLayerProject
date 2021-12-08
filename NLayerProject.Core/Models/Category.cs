@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NLayerProject.Core.Models
 {
-    internal class Category
+    public class Category
     {
         public Category()
         {
@@ -13,7 +13,7 @@ namespace NLayerProject.Core.Models
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } 
         public ICollection<Product> Products { get; set; } //Her kategorinin birden fazla ürünü olabilir
                                                            //1-n ilişkiyi ICollection ile anlıcak..
     }
