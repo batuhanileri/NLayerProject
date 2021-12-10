@@ -10,7 +10,7 @@ namespace NLayerProject.Core.Repositories
     {
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> expression);
+        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
         //IEnumerable birden fazla kayıt varsa dönmeyi sağlar
 
         // category.SingleOrDefaultAsync(x=>x.name="kalem") vs.
@@ -19,7 +19,7 @@ namespace NLayerProject.Core.Repositories
         Task AddRangeAsync(IEnumerable<TEntity> entities); //Birden fazla kayıt olabilir.
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-        Task Update(TEntity entity);
+        TEntity Update(TEntity entity);
 
     }
 }
