@@ -14,7 +14,7 @@ namespace NLayerProject.Data.Repositories
     {
         public readonly DbContext _context; //veritabanına erişebiliriz
         public readonly DbSet<TEntity> _dbSet; //tablolara erişiriz
-        public Repository(DbContext context)
+        public Repository(AppDbContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();
@@ -30,9 +30,9 @@ namespace NLayerProject.Data.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> expression)
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> expression)
         {
-            return _dbSet.Where(expression);
+            return await _dbSet.Where(expression).ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

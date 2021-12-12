@@ -10,7 +10,7 @@ namespace NLayerProject.Core.Repositories
     {
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
+        Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> expression);
         //IEnumerable birden fazla kayıt varsa dönmeyi sağlar
 
         // category.SingleOrDefaultAsync(x=>x.name="kalem") vs.
