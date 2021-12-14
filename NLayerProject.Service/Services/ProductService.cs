@@ -15,7 +15,10 @@ namespace NLayerProject.Service.Services
         public ProductService(IUnitOfWork unitOfWork, IRepository<Product> repository) : base(unitOfWork, repository)
         {
         }
-
+        public async Task<Product> GetWithCategoryByIdAsync(int productId)
+        {
+            return await _unitOfWork.Products.GetWithCategoryByIdAsync(productId);
+        }
         //public readonly IUnitOfWork _unitOfWork;
         //public ProductService(IUnitOfWork unitOfWork)
         //{
