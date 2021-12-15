@@ -15,12 +15,14 @@ namespace NLayerProject.Data
         }
         public DbSet<Category> Categories { get; set; } 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Person> Persons { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //product ve category veritabanında tabloya dönüşürken nasıl dönüşüceği
             //onmodelcreating ile belirliyoruz => primary key , min max vs...
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new PersonConfiguration());
         }
     }
 }

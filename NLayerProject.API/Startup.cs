@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using NLayerProject.API.Filters;
+
 namespace NLayerProject.API
 {
     public class Startup
@@ -34,6 +36,7 @@ namespace NLayerProject.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<NotFoundFilter>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<ICategoryRepository, CategoryRepository>();
 
@@ -49,6 +52,11 @@ namespace NLayerProject.API
 
             });
             services.AddControllers();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
