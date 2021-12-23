@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NLayerProject.Core.Models;
 using NLayerProject.Core.Services;
+using NLayerProject.WebUI.ApiService;
 using NLayerProject.WebUI.DTOs;
 using NLayerProject.WebUI.Filters;
 using System;
@@ -15,14 +16,17 @@ namespace NLayerProject.WebUI.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
-        public CategoriesController(ICategoryService categoryService, IMapper mapper)
+        private readonly CategoryApiService _categoryApiService;
+        public CategoriesController(ICategoryService categoryService, IMapper mapper, CategoryApiService categoryApiService)
         {
             _categoryService = categoryService;
             _mapper = mapper;
+            _categoryApiService = categoryApiService;
         }
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllAsync();
+            //var categories = await _categoryService.GetAllAsync(); // Katmandan gelen verilerle işlem yapıyor 
+            var categories = await _categoryApiService.GetAllAsync(); // Api ile işlem yapıyor.
             return View(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
         public IActionResult Create()
