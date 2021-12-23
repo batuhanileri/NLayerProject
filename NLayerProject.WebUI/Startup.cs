@@ -2,17 +2,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NLayerProject.Core.Repositories;
-using NLayerProject.Core.Services;
-using NLayerProject.Core.UnitOfWorks;
-using NLayerProject.Data;
-using NLayerProject.Data.Repositories;
-using NLayerProject.Data.UnitOfWorks;
-using NLayerProject.Service.Services;
 using NLayerProject.WebUI.ApiService;
 using NLayerProject.WebUI.Filters;
 using System;
@@ -43,18 +35,7 @@ namespace NLayerProject.WebUI
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<NotFoundFilter>();
 
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped(typeof(IService<>), typeof(Service<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString()
-                    , o => { o.MigrationsAssembly("NLayerProject.Data"); });
-
-            });
+            
             services.AddControllersWithViews();
         }
 
