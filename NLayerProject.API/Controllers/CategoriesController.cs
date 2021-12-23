@@ -44,7 +44,7 @@ namespace NLayerProject.API.Controllers
         [HttpPut]
         public IActionResult Update(CategoryDto categoryDto)
         {
-            var category = _categoryService.Update(_mapper.Map<Category>(categoryDto));
+            _categoryService.Update(_mapper.Map<Category>(categoryDto));
             return NoContent();
         }
         [HttpDelete("{id}")]
